@@ -15,13 +15,17 @@ public class Owner extends Person {
 	
 	private Address address = new Address(this);
 
-    @OneToMany
-    @JoinColumn(name = "PETS_OWNER_ID")
+    @OneToMany(mappedBy = "owner")
+    /**
+     * JoinColumn ilişkiyi yöneten tarafta belirtilir.
+     * Bu yüzden comment out ettik.
+     */
+//  @JoinColumn(name = "PETS_OWNER_ID")
 	private Set<Pet> pets = new HashSet<Pet>();
 	
 	public Set<Pet> getPets() {
 		//return Collections.unmodifiableSet(pets);
-        return pets;
+        return  pets;
 	}
 	
 	public void addPet(Pet pet) {

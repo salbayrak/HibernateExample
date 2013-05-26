@@ -63,7 +63,7 @@ public class Pet extends BaseEntity {
 		return this.type;
 	}
 
-	public void setOwner(Owner owner) {
+	protected void setOwner(Owner owner) {
 		this.owner = owner;
 	}
 

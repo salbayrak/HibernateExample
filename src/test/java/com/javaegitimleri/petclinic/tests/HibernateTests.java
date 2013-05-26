@@ -41,7 +41,7 @@ public class HibernateTests {
         session.save(pet);
 
         o.getPets().add(pet);
-        pet.setOwner(o2);
+        //pet.setOwner(o2);
 
         transaction.commit();
     }
