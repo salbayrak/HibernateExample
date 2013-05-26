@@ -27,6 +27,8 @@ public class Pet extends BaseEntity {
 
 	private PetType type;
 
+    @ManyToOne
+    @JoinColumn(name = "OWNER_ID")
 	private Owner owner;
 
     @Transient
@@ -61,7 +63,7 @@ public class Pet extends BaseEntity {
 		return this.type;
 	}
 
-	protected void setOwner(Owner owner) {
+	public void setOwner(Owner owner) {
 		this.owner = owner;
 	}
 
