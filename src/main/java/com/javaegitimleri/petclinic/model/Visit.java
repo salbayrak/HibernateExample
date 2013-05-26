@@ -6,10 +6,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.annotations.ManyToAny;
 
-import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 public class Visit extends BaseEntity {
@@ -21,6 +20,8 @@ public class Visit extends BaseEntity {
 
 	private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "PET_ID", insertable = false, updatable = false)
 	private Pet pet;
 
 	private Boolean checkup = false;

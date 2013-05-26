@@ -25,17 +25,20 @@ public class Pet extends BaseEntity {
     @Temporal(TemporalType.DATE)
 	private Date birthDate;
 
+    @ManyToOne
 	private PetType type;
 
     @ManyToOne
     @JoinColumn(name = "OWNER_ID")
 	private Owner owner;
 
-    @Transient
+    @OneToMany(orphanRemoval = true)
+    @OrderColumn(name = "pos")
+    @JoinColumn(name = "PET_ID")
 	private List<Visit> visits = new ArrayList<Visit>();
 
     @ElementCollection
-    @MapKeyColumn(name = "XXX")
+    @MapKeyColumn
 	private Map<String,Image> imagesByName = new HashMap<String, Image>();
 
 	
