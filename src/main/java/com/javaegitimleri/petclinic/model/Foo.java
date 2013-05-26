@@ -14,6 +14,9 @@ public class Foo {
     @Column(name="C_NAME")
     private String name;
 
+    @Embedded
+    private Bar bar;
+
     public Foo() {
 
     }
