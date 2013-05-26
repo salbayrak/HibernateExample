@@ -11,6 +11,16 @@ import javax.persistence.*;
 @Table(name="T_FOO")
 public class Foo {
 
+    /**
+     * varchar ın tutabileceğinden çok daha fazla bir alana
+     * ihtiyaç duyuyorsak Lob kullanıyoruz. sql tipi text için
+     * buna clob diyoruz. Tanımlarken direkt "private clop name"
+     * diye tanımlayabiliriz. Bir de blob var. blob ve clop
+     * alanlar pointer'dır. Veritabanı conn'ı açık olduğu müddetçe
+     * içeriklerine ulaşabiliriz. Hibernate için session'ın açık
+     * olması gerekir.
+     */
+    @Lob
     @Column(name="C_NAME")
     private String name;
 
