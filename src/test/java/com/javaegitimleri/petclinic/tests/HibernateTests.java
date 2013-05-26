@@ -16,9 +16,7 @@ public class HibernateTests {
     public void testHibernateSetup() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        Foo foo = new Foo();
-        foo.setName("xxx");
-        foo.setId(1L);
+        Foo foo = new Foo("xxx");
         session.save(foo);
         transaction.commit();
         session.close();

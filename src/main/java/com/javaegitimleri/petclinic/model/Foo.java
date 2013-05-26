@@ -1,34 +1,37 @@
 package com.javaegitimleri.petclinic.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * User: salbayrak
  * Date: 5/26/13
  * Time: 11:40 AM
  */
-@Entity
+@Entity(name="fool")
+@Table(name="T_FOO")
 public class Foo {
 
+    @Column(name="C_NAME")
     private String name;
 
+    public Foo() {
+
+    }
+
+    public Foo(String name) {
+        this.name = name;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }
