@@ -11,5 +11,6 @@
 	    <property name="hibernate.cache.use_second_level_cache">false</property>
   	    <property name="hibernate.cache.use_query_cache">false</property>
         <mapping class="com.javaegitimleri.petclinic.model.Foo" />
+        <mapping class="com.javaegitimleri.petclinic.model.Owner" />
     </session-factory>
 </hibernate-configuration>

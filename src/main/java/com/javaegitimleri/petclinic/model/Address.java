@@ -6,7 +6,11 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.annotations.Parent;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Address implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -18,7 +22,8 @@ public class Address implements Serializable {
 	private String telephone;
 
 	private PhoneType phoneType;
-	
+
+    @Parent
 	private Owner owner;
 	
 	public Address() {
