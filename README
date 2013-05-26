@@ -1,1 +1,6 @@
-This file was created by IntelliJ IDEA 12.0.4 for binding GitHub repository
+petclinic is an example project which is prepared by Kenan Sevindik for
+the lab study of Introduction to Hibernate Education. Tests and some java classes
+are written by a software team in a workshop environment at Ebay Turkey Office.
+
+This study is useful for the Hibernate beginners. Just checkout and try to explore
+hibernate world. 
