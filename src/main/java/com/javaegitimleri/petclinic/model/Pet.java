@@ -7,20 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Collections;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.OrderColumn;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -54,7 +44,7 @@ public class Pet extends BaseEntity {
 	@OneToMany(orphanRemoval=true)
 	@JoinColumn(name="pet_id")
 	@OrderColumn(name="pos_index")
-    @LazyCollection(LazyCollectionOption.EXTRA) // bu özelliği aktive edersek sadece size'ına eriştiğimiz zaman count sorgusu atar.
+    @LazyCollection(LazyCollectionOption.EXTRA) // bu özelliği aktive edersek testFetching testinde sadece size'ına eriştiğimiz zaman bile count sorgusu atar.
 	private List<Visit> visits = new ArrayList<Visit>();
 	
 	@ElementCollection
