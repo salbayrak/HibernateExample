@@ -26,9 +26,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.ForeignKey;
+import org.hibernate.annotations.*;
 
 
 @Entity
@@ -56,6 +54,7 @@ public class Pet extends BaseEntity {
 	@OneToMany(orphanRemoval=true)
 	@JoinColumn(name="pet_id")
 	@OrderColumn(name="pos_index")
+    @LazyCollection(LazyCollectionOption.EXTRA) // bu özelliği aktive edersek sadece size'ına eriştiğimiz zaman count sorgusu atar.
 	private List<Visit> visits = new ArrayList<Visit>();
 	
 	@ElementCollection

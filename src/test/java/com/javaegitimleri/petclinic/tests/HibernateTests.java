@@ -6,6 +6,7 @@ import com.javaegitimleri.petclinic.dao.PetClinicDaoHibernateImpl;
 import com.javaegitimleri.petclinic.model.Foo;
 import com.javaegitimleri.petclinic.model.Owner;
 import com.javaegitimleri.petclinic.model.Pet;
+import com.javaegitimleri.petclinic.model.Visit;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
@@ -73,5 +74,18 @@ public class HibernateTests {
     @Test
     public void testDeleteOwner() {
 
+    }
+
+    @Test
+    public void testFetching() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Pet pet = (Pet) session.get(Pet.class, 7L);
+        System.out.println("before get visits");
+        pet.getVisits().size(); // extra lazy pasifken collection'ı load eder.
+
+        Visit v = new Visit();
+        v.setId(1L);
+
+        pet.getVisits().contains(v); // extra lazy aktif iken bütün visitleri load etmez.
     }
 }
