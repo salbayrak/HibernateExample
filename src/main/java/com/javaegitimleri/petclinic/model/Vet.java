@@ -1,5 +1,7 @@
 package com.javaegitimleri.petclinic.model;
 
+import org.hibernate.annotations.ForeignKey;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,6 +21,7 @@ public class Vet extends Person {
             inverseJoinColumns = @JoinColumn(name = "SPEC_ID"))
 	private Set<Specialty> specialties = new HashSet<Specialty>();
 
+    @ForeignKey(name = "FK_VET_ID", inverseName = "FK_SPEC_ID")
 	public Set<Specialty> getSpecialties() {
 		return Collections.unmodifiableSet(specialties);
 	}
