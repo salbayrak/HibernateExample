@@ -41,7 +41,7 @@ public class Pet extends BaseEntity {
 	@JoinColumn(name="owner_id")
 	private Owner owner;
 
-	@OneToMany(orphanRemoval=true)
+	@OneToMany(orphanRemoval=true, fetch = FetchType.EAGER)
 	@JoinColumn(name="pet_id")
 	@OrderColumn(name="pos_index")
     @LazyCollection(LazyCollectionOption.EXTRA) // bu özelliği aktive edersek testFetching testinde sadece size'ına eriştiğimiz zaman bile count sorgusu atar.
