@@ -22,8 +22,8 @@ public class Owner extends Person {
 	private Set<Pet> pets = new HashSet<Pet>();
 	
 	public Set<Pet> getPets() {
-		//return Collections.unmodifiableSet(pets);
-        return  pets;
+		return Collections.unmodifiableSet(pets);
+        //return  pets;
 	}
 	
 	public void addPet(Pet pet) {
