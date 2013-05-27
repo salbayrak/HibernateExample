@@ -1,6 +1,8 @@
 package com.javaegitimleri.petclinic.tests;
 
 import com.javaegitimleri.petclinic.dao.HibernateUtils;
+import com.javaegitimleri.petclinic.dao.PetClinicDao;
+import com.javaegitimleri.petclinic.dao.PetClinicDaoHibernateImpl;
 import com.javaegitimleri.petclinic.model.Foo;
 import com.javaegitimleri.petclinic.model.Owner;
 import com.javaegitimleri.petclinic.model.Pet;
@@ -45,5 +47,31 @@ public class HibernateTests {
         //pet.setOwner(o2);
 
         transaction.commit();
+    }
+
+    @Test
+    public void testSaveOwner() {
+        PetClinicDaoHibernateImpl petClinicDao = new PetClinicDaoHibernateImpl();
+        Owner o = new Owner();
+        o.setFirstName("SEDA");
+        o.setLastName("YALC");
+
+        Pet p = new Pet();
+        p.setName("zeytin");
+
+        o.addPet(p);
+        petClinicDao.saveOwner(o);
+    }
+
+    @Test
+    public void testLoadOwner() {
+        PetClinicDaoHibernateImpl petClinicDao = new PetClinicDaoHibernateImpl();
+        Owner o = petClinicDao.loadOwner(1000);
+        System.out.print(o.getFirstName());
+    }
+
+    @Test
+    public void testDeleteOwner() {
+
     }
 }
