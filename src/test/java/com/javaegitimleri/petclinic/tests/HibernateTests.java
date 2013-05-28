@@ -11,6 +11,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * User: salbayrak
  * Date: 5/26/13
@@ -111,5 +113,13 @@ public class HibernateTests {
         tx2.commit();
         System.out.println("after tx2 commit");
         tx1.commit();
+    }
+
+    @Test
+    public void testHQL() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        List<Owner> list = session.createQuery("select distinct o from Owner o join fetch o.pets p where p.name like 'L%'").list();
+        session.close();
+        System.out.println(list.get(0).getPets().size());
     }
 }
