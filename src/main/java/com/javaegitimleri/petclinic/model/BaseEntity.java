@@ -2,10 +2,7 @@ package com.javaegitimleri.petclinic.model;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 
 @MappedSuperclass
@@ -16,7 +13,8 @@ public abstract class BaseEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Long id;
-	
+
+    @Version
 	private int version;
 
 	public Long getId() {

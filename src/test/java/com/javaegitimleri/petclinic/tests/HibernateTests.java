@@ -88,7 +88,28 @@ public class HibernateTests {
     public void testPetAssociations() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         Pet pet = (Pet) session.get(Pet.class, 1150L);
-
     }
 
+    @Test
+    /**
+     * Row was updated or deleted by another transation hatası alırız,
+     * id'si 7 olan person'ın version'u 1 arttırıldı.
+     */
+    public void testOptimisticLock() {
+        Session session1 = HibernateUtils.getSessionFactory().openSession();
+        Session session2 = HibernateUtils.getSessionFactory().openSession();
+
+        Transaction tx1 = session1.beginTransaction();
+        Transaction tx2 = session2.beginTransaction();
+
+        Owner o1 = (Owner) session1.get(Owner.class, 7L);
+        Owner o2 = (Owner) session2.get(Owner.class, 7L);
+
+        o1.setLastName("taskin");
+        o2.setLastName("gok");
+
+        tx2.commit();
+        System.out.println("after tx2 commit");
+        tx1.commit();
+    }
 }
