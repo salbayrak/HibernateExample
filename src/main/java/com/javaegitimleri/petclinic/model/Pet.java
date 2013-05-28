@@ -32,19 +32,21 @@ public class Pet extends BaseEntity {
 	@Column(name="birth_date")
 	private Date birthDate;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@ForeignKey(name="pet_type_fk")
 	@JoinColumn(name="type_id")
 	private PetType type;
 
 	@ManyToOne
+    @Fetch(FetchMode.JOIN)
 	@JoinColumn(name="owner_id")
 	private Owner owner;
 
 	@OneToMany(orphanRemoval=true, fetch = FetchType.EAGER)
 	@JoinColumn(name="pet_id")
 	@OrderColumn(name="pos_index")
-    @LazyCollection(LazyCollectionOption.EXTRA) // bu özelliği aktive edersek testFetching testinde sadece size'ına eriştiğimiz zaman bile count sorgusu atar.
+    @Fetch(FetchMode.JOIN)
+    //@LazyCollection(LazyCollectionOption.EXTRA) // bu özelliği aktive edersek testFetching testinde sadece size'ına eriştiğimiz zaman bile count sorgusu atar.
 	private List<Visit> visits = new ArrayList<Visit>();
 	
 	@ElementCollection
