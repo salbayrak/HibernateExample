@@ -1,11 +1,12 @@
 package com.javaegitimleri.petclinic.dao;
 
 import com.javaegitimleri.petclinic.model.*;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * User: salbayrak
@@ -15,22 +16,40 @@ import java.util.Collection;
 public class PetClinicDaoHibernateImpl implements PetClinicDao {
     @Override
     public Collection<Vet> getVets() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Collection<Vet> result = session.createQuery("from Vet v left join fetch v.specialties").list();
+        session.close();
+        return result;
     }
 
     @Override
     public Collection<Owner> findOwners(String lastName) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Collection<Owner> result = session.createQuery("from Owner o left join fetch o.pets p left join fetch p.imagesByName where o.lastName = :lastName").setParameter("lastName", lastName).list();
+        session.close();
+        return result;
     }
 
     @Override
     public Collection<Visit> findVisits(long petId) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Visit.class).
+                createAlias("pet", "p").
+                createAlias("p.type", "t", JoinType.LEFT_OUTER_JOIN).
+                createAlias("p.imagesByName", "i", JoinType.LEFT_OUTER_JOIN).
+                add(Restrictions.eq("p.id", petId));
+        // Dublicate kayıtları elemine etmek için DISTINCT_ROOT_ENTITY kullandık.
+        List result = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+        session.close();
+        return result;
     }
 
     @Override
     public Collection<Person> findAllPersons() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Collection<Person> result = session.createQuery("from Person").list();
+        session.close();
+        return result;
     }
 
     @Override

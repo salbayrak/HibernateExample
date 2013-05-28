@@ -3,14 +3,13 @@ package com.javaegitimleri.petclinic.tests;
 import com.javaegitimleri.petclinic.dao.HibernateUtils;
 import com.javaegitimleri.petclinic.dao.PetClinicDao;
 import com.javaegitimleri.petclinic.dao.PetClinicDaoHibernateImpl;
-import com.javaegitimleri.petclinic.model.Foo;
-import com.javaegitimleri.petclinic.model.Owner;
-import com.javaegitimleri.petclinic.model.Pet;
-import com.javaegitimleri.petclinic.model.Visit;
+import com.javaegitimleri.petclinic.model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -19,14 +18,12 @@ import java.util.List;
  * Time: 11:27 AM
  */
 public class HibernateTests {
-    @Test
+
+    private PetClinicDaoHibernateImpl petClinicDaoHibernateImpl;
+
+    @Before
     public void testHibernateSetup() {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        Foo foo = new Foo("xxx");
-        session.save(foo);
-        transaction.commit();
-        session.close();
+        petClinicDaoHibernateImpl = new PetClinicDaoHibernateImpl();
     }
 
     @Test
@@ -56,7 +53,7 @@ public class HibernateTests {
     public void testSaveOwner() {
         PetClinicDaoHibernateImpl petClinicDao = new PetClinicDaoHibernateImpl();
         Owner o = new Owner();
-        o.setFirstName("Yeni");
+        o.setFirstName("Denem");
         o.setLastName("YALC");
 
         Pet p = new Pet();
@@ -129,5 +126,29 @@ public class HibernateTests {
         List<Owner> list = session.createQuery("select distinct o from Owner o join fetch o.pets p left join fetch p.visits left join fetch  p.imagesByName where p.name like 'L%'").list();
         session.close();
         System.out.println(list.get(0).getPets());
+    }
+
+    @Test
+    public void testGetVets() {
+        Collection<Vet> vets = petClinicDaoHibernateImpl.getVets();
+        for(Vet v : vets) {
+            System.out.println(v);
+        }
+    }
+
+    @Test
+    public void testFindOwners() {
+        Collection<Owner> owners = petClinicDaoHibernateImpl.findOwners("SEDA");
+        for(Owner o : owners) {
+            System.out.println(o);
+        }
+    }
+
+    @Test
+    public void testFindVisits() {
+        Collection<Visit> visits = petClinicDaoHibernateImpl.findVisits(7L);
+        for(Visit v: visits) {
+            System.out.println(v);
+        }
     }
 }
