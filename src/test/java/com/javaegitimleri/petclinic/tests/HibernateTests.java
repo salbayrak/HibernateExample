@@ -54,7 +54,7 @@ public class HibernateTests {
     public void testSaveOwner() {
         PetClinicDaoHibernateImpl petClinicDao = new PetClinicDaoHibernateImpl();
         Owner o = new Owner();
-        o.setFirstName("Ayse");
+        o.setFirstName("Omer");
         o.setLastName("YALC");
 
         Pet p = new Pet();
@@ -67,14 +67,14 @@ public class HibernateTests {
     @Test
     public void testLoadOwner() {
         PetClinicDaoHibernateImpl petClinicDao = new PetClinicDaoHibernateImpl();
-        Owner o = petClinicDao.loadOwner(1000);
+        Owner o = petClinicDao.loadOwner(1040);
         System.out.print(o.getFirstName());
     }
 
     @Test
     public void testDeleteOwner() {
         PetClinicDaoHibernateImpl petClinicDao = new PetClinicDaoHibernateImpl();
-        petClinicDao.deleteOwner(1000L);
+        petClinicDao.deleteOwner(1040L);
     }
 
     @Test
