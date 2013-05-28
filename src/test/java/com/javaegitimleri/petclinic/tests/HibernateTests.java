@@ -54,7 +54,7 @@ public class HibernateTests {
     public void testSaveOwner() {
         PetClinicDaoHibernateImpl petClinicDao = new PetClinicDaoHibernateImpl();
         Owner o = new Owner();
-        o.setFirstName("Omer");
+        o.setFirstName("Yeni");
         o.setLastName("YALC");
 
         Pet p = new Pet();
@@ -67,7 +67,7 @@ public class HibernateTests {
     @Test
     public void testLoadOwner() {
         PetClinicDaoHibernateImpl petClinicDao = new PetClinicDaoHibernateImpl();
-        Owner o = petClinicDao.loadOwner(1040);
+        Owner o = petClinicDao.loadOwner(1140);
         System.out.print(o.getFirstName());
     }
 
@@ -84,6 +84,11 @@ public class HibernateTests {
         System.out.println("before get visits");
     }
 
+    @Test
+    public void testPetAssociations() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Pet pet = (Pet) session.get(Pet.class, 1150L);
 
+    }
 
 }

@@ -37,8 +37,8 @@ public class Pet extends BaseEntity {
 	@JoinColumn(name="type_id")
 	private PetType type;
 
-	@ManyToOne
-    @Fetch(FetchMode.JOIN)
+	@ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
 	@JoinColumn(name="owner_id")
 	private Owner owner;
 
