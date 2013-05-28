@@ -10,6 +10,7 @@
         <property name="hibernate.use_sql_comments">true</property>
 	    <property name="hibernate.cache.use_second_level_cache">false</property>
   	    <property name="hibernate.cache.use_query_cache">false</property>
+        <property name="hibernate.current_session_context_class">thread</property>
         <mapping class="com.javaegitimleri.petclinic.model.Foo" />
         <mapping class="com.javaegitimleri.petclinic.model.Owner" />
         <mapping class="com.javaegitimleri.petclinic.model.Visit" />

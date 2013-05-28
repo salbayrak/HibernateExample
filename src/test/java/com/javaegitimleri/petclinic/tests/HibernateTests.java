@@ -4,6 +4,7 @@ import com.javaegitimleri.petclinic.dao.HibernateUtils;
 import com.javaegitimleri.petclinic.dao.PetClinicDao;
 import com.javaegitimleri.petclinic.dao.PetClinicDaoHibernateImpl;
 import com.javaegitimleri.petclinic.model.*;
+import junit.framework.Assert;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Before;
@@ -150,5 +151,30 @@ public class HibernateTests {
         for(Visit v: visits) {
             System.out.println(v);
         }
+    }
+
+   @Test
+   public void testConversation() {
+       // No CurrentSessionContext configured! hatası verir,
+       // fakat hibernate.cfg.xml'e hibernate.current_session_context_class
+       // property'sini thread olarak eklersek çalışır
+       HibernateUtils.getSessionFactory().getCurrentSession();
+   }
+
+    @Test
+    public void testConversationTwo() {
+        Session session1 = HibernateUtils.getSessionFactory().getCurrentSession();
+        Session session2 = HibernateUtils.getSessionFactory().getCurrentSession();
+
+        Assert.assertSame(session1,session2);
+    }
+
+    @Test
+    public void testConversationTwoNotSame() {
+        Session session1 = HibernateUtils.getSessionFactory().getCurrentSession();
+        session1.beginTransaction().commit();
+        Session session2 = HibernateUtils.getSessionFactory().getCurrentSession();
+
+        Assert.assertNotSame(session1,session2);
     }
 }
