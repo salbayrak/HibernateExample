@@ -122,4 +122,12 @@ public class HibernateTests {
         session.close();
         System.out.println(list.get(0).getPets().size());
     }
+
+    @Test
+    public void testHQLTwo() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        List<Owner> list = session.createQuery("select distinct o from Owner o join fetch o.pets p left join fetch p.visits left join fetch  p.imagesByName where p.name like 'L%'").list();
+        session.close();
+        System.out.println(list.get(0).getPets());
+    }
 }
