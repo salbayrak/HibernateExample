@@ -54,11 +54,11 @@ public class HibernateTests {
     public void testSaveOwner() {
         PetClinicDaoHibernateImpl petClinicDao = new PetClinicDaoHibernateImpl();
         Owner o = new Owner();
-        o.setFirstName("SEDA");
+        o.setFirstName("Ayse");
         o.setLastName("YALC");
 
         Pet p = new Pet();
-        p.setName("zeytin");
+        p.setName("miskin");
 
         o.addPet(p);
         petClinicDao.saveOwner(o);
@@ -73,7 +73,8 @@ public class HibernateTests {
 
     @Test
     public void testDeleteOwner() {
-
+        PetClinicDaoHibernateImpl petClinicDao = new PetClinicDaoHibernateImpl();
+        petClinicDao.deleteOwner(1000L);
     }
 
     @Test
@@ -81,11 +82,8 @@ public class HibernateTests {
         Session session = HibernateUtils.getSessionFactory().openSession();
         Pet pet = (Pet) session.get(Pet.class, 7L);
         System.out.println("before get visits");
-        pet.getVisits().size(); // extra lazy pasifken collection'ı load eder.
-
-        Visit v = new Visit();
-        v.setId(1L);
-
-        pet.getVisits().contains(v); // extra lazy aktif iken bütün visitleri load etmez.
     }
+
+
+
 }
